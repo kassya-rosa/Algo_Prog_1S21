@@ -1,0 +1,19 @@
+algoritmo exer2;
+// Síntese
+//  Objetivo:  Calcular a área do círculo de acorodo com a área informada
+//  Entrada : Raio
+//  Saída   : área do círculo
+
+principal
+	// Declarações de variáveis
+	real raio, pis, area;
+	// Instruções
+	// Perguntar a área do círculo
+	escreva("Informe o raio do círculo: ");
+	leia(raio);
+	pis = 3.14;
+	// Calcula a área
+	area = pis*raio*raio;
+	// Informa a área do círculo
+	escreva("A área do círuclo é: ", area);
+fimPrincipal

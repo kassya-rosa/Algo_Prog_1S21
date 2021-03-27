@@ -1,0 +1,30 @@
+algoritmo exer7;
+// Síntese
+//  Objetivo: Gravar dados de um funcionário e apresentar na tela, com o cálculo do salário
+//  Entrada : Nome, Sexo (F e M), Matrícula (n°), Horas trabalhadas, Valor recebido por hora trabalhada
+//  Saída   : Dados do funcionário e salário
+
+principal
+	// Declarações de variáveis
+	texto nome, sexo;
+	inteiro mat, horas;
+	real  salHora, salario;
+	// Instruções
+	escreval("Informe o nome do funcionário: ");
+	leia(nome);
+	escreval("Informe o sexo do funcionário (F ou M): ");
+	leia(sexo);
+	escreval("Informe a matrícula do funcionário: ");
+	leia(mat);
+	escreval("Informe a qtde de horas trabalhadas do funcionário: ");
+	leia(horas);
+	escreval("Informe valor do salário por hora do funcionário: ");
+	leia(salHora);
+	salario = horas * salHora;
+	escreval("Nome: ", nome);
+	escreval("Sexo: ", sexo);
+	escreval("Matrícula: ", mat);
+	escreval("Quantidade de horas trabalhadas: ", horas, " horas");
+	escreval("Valor do salário por hora: ", salHora);
+	escreval("Salário: ", salario);
+fimPrincipal

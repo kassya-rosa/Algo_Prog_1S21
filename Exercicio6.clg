@@ -1,0 +1,19 @@
+algoritmo exer6;
+// Síntese
+//  Objetivo: Calcular a média ponderada das notas de um aluno
+//  Entrada : Duas notas
+//  Saída   : Média ponderada
+
+principal
+	// Declarações de variáveis
+	real nota1, nota2, media, cta1, cta2;
+	// Instruções
+	escreva("Informe a nota 1: ");
+	leia(nota1);
+	escreva("Informe a nota 2: ");
+	leia(nota2);
+	cta1 = nota1 * 3.5;
+	cta2 = nota2 * 7.5;
+	media = (cta1 + cta2)/11;
+	escreva("A média do aluno é ", media);
+fimPrincipal

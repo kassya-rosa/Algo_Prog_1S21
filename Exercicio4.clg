@@ -1,0 +1,19 @@
+algoritmo exer4;
+// Síntese
+//  Objetivo: Informar o resto e a divisão de dois números inteiros
+//  Entrada : 2 números inteiros
+//  Saída   : Resto e quociente
+
+principal
+	// Declarações de variáveis
+	inteiro num1, num2;
+	real resto, quociente;
+	// Instruções
+	escreva("Informe dois números: ");
+	leia(num1);
+	escreva("");
+	leia(num2);
+	resto = num1 mod num2;
+	quociente = num1 \ num2;
+	escreva("O resto é ", resto, " e o quociente é ", quociente);
+fimPrincipal

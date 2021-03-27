@@ -1,0 +1,17 @@
+algoritmo exer5;
+// Síntese
+//  Objetivo: Calcular a qtde de rolos e metros avulsos necessários
+//  Entrada : Metros de fios
+//  Saída   : Qtde de rolos e Metros avulsos
+
+principal
+	// Declarações de variáveis
+	inteiro num1, rolos;
+	real  metros;
+	// Instruções
+	escreva("Informe os metros de fios: ");
+	leia(num1);
+	rolos = num1 / 50;
+	metros = num1 mod 50;
+	escreva("Serão necessários ", rolos, " rolos e ", metros, " metros avulsos.");
+fimPrincipal
