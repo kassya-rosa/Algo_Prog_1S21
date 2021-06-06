@@ -43,17 +43,14 @@ do{// do-while para voltar ao menu principal
    				if(strlen(nome_destino) <= 1)
    					printf("    NOME INVÁLIDO\n\n");
    		}while(strlen(nome_destino) <= 1);
-   		
-   	//	printf("Nome: %s", nome_destino);
    	
-   	//system("pause");
     system("cls");
     
     printf("***********************************************\n");
     printf("*************SALUMAR LINHAS AEREAS*************\n");
     printf("***********************************************\n\n\n\n");
        
-   		do{							
+   		do{// do-while para verificação de campo sem valor							
 			printf("    INFORME O VALOR DA PASSAGEM\n\n");
 		    scanf("%f", &valor_passagem);
 		    fflush(stdin);
@@ -61,8 +58,6 @@ do{// do-while para voltar ao menu principal
 					printf("\n    VALOR INVÁLIDO\n");
 		}while(valor_passagem<0);
    
-   	//	printf("Valor: %.2f", valor_passagem);
-   	//system("pause");
     system("cls");
    
     printf("***********************************************\n");
@@ -78,17 +73,17 @@ do{// do-while para voltar ao menu principal
 		}while(assentos_aviao<90 || assentos_aviao>200);
    
  	// Declaração de variáveis das reservas
-    int aux_assentos=1,aux_reserva=1, primeira_reserva=1, aux_canceladas, aux_confirma, cont_confirmada;
+    int aux_assentos=1,aux_reserva=1, primeira_reserva=1, aux_canceladas, aux_confirma, cont_confirmada=0, cont_reservada=0, aux_disponiveis;
     int num_reserva[assentos_aviao], pessoas_reserva[assentos_aviao],idade_cli_reserva[assentos_aviao];
     int assento_reserva[assentos_aviao], reservados[assentos_aviao], confirmados[assentos_aviao], disponiveis[assentos_aviao];
     char fim_efetuar_reserva, nome_cli_reserva[assentos_aviao][100], vetor_assentos[assentos_aviao], situacao_reserva[assentos_aviao];
     char confirma_cancelamento, valida_confirmacao, sair_cancelada, sair_confirmada;
-    float valor_passagem_reserva[assentos_aviao], valor_total_confirmadas=0, valor_reservas=0, aux_disponiveis;
+    float valor_passagem_reserva[assentos_aviao], valor_total_confirmadas=0, valor_reservas=0;
 	
-		for(aux_assentos=1;aux_assentos<=assentos_aviao;aux_assentos++){
+		for(aux_assentos=1;aux_assentos<=assentos_aviao;aux_assentos++){ // Criação do mapa de assentos inicial
 			vetor_assentos[aux_assentos] = 'D';
 		}
-	//system("pause");
+
     system("cls");
     
 	
@@ -101,7 +96,8 @@ do{// do-while para voltar ao menu principal
 	    printf("2 - EFETUAR RESERVA\n\n");
 	    printf("3 - CANCELAR RESERVA\n\n");
 	    printf("4 - CONFIRMAR RESERVA\n\n");
-	    printf("5 - CONSULTAR RESUMO DO DESTINO\n\n\n");
+	    printf("5 - CONSULTAR RESUMO DO DESTINO\n\n");
+		printf("6 - SAIR DO PROGRAMA\n\n\n");
 	    printf("    INFORME A OPÇÃO DESEJADA: ");
 	    scanf("%d", &menu_opcao_destino);
 	   
@@ -115,7 +111,7 @@ do{// do-while para voltar ao menu principal
 			    printf("***********************************************\n\n\n\n");
 			    printf("    MAPA DE ASSENTOS\n\n");
 
-			        for(aux_assentos=1;aux_assentos<=assentos_aviao;aux_assentos++){
+			        for(aux_assentos=1;aux_assentos<=assentos_aviao;aux_assentos++){// Criação do mapa de assentos conforme passagem é reservada, cancelada ou confirmada
 				    	if(vetor_assentos[aux_assentos]=='D')
 				    		printf(" %d-\033[32;1m%c\033[0m",aux_assentos,vetor_assentos[aux_assentos]);
 				    		else
@@ -145,9 +141,9 @@ do{// do-while para voltar ao menu principal
 					printf("\nINFOME A IDADE DO PASSAGEIRO Nº %d: ", aux_reserva);
 					scanf("%d",&idade_cli_reserva[aux_reserva]);
 					fflush(stdin);
-						if(idade_cli_reserva[aux_reserva]<0)
+						if(idade_cli_reserva[aux_reserva]<0 ||idade_cli_reserva[aux_reserva]>115)
 							printf("\nIDADE INVÁLIDA\n");
-				}while(idade_cli_reserva[aux_reserva]<0);
+				}while(idade_cli_reserva[aux_reserva]<0 ||idade_cli_reserva[aux_reserva]>115);
 				
 				do{	
 					fflush(stdin);
@@ -174,9 +170,10 @@ do{// do-while para voltar ao menu principal
 					else
 					valor_passagem_reserva[aux_reserva] = valor_passagem;
 				
+				
 				printf("\n\nVALOR DA PASSAGEM DESTA RESERVA: R$ %.2f\n\n", valor_passagem_reserva[aux_reserva]);
 				printf("CÓDIGO DA RESERVA: %d\n\n", aux_reserva);
-								
+				
 				aux_reserva++;
 				
 				;break;
@@ -191,7 +188,7 @@ do{// do-while para voltar ao menu principal
 						scanf("%d",&aux_canceladas);
 						fflush(stdin);
 						
-							if(situacao_reserva[aux_canceladas]=='I')
+							if(situacao_reserva[aux_canceladas]=='I')// Validação inicial para saber se a reserva informada já está cancelada ou não existe
 								printf("\nRESERVA JÁ CANCELADA\n");
 								else
 									if(situacao_reserva[aux_canceladas]=='A' || situacao_reserva[aux_canceladas]=='C')
@@ -199,7 +196,7 @@ do{// do-while para voltar ao menu principal
 										else
 										printf("\nRESERVA INEXISTENTE\n");
 							
-							printf("TENTAR NOVAMENTE?[S|N]\n");
+							printf("TENTAR NOVAMENTE?[S|N]\n");// opção de entrar com outra reserva
 							scanf("%c", &sair_cancelada);
 							fflush(stdin);
 							
@@ -212,14 +209,14 @@ do{// do-while para voltar ao menu principal
 				
 				if(sair_cancelada=='N')
 					break;
-				
+					
 				system("cls");
 			
 				printf("***********************************************\n");
 			    printf("*************SALUMAR LINHAS AEREAS*************\n");
 			    printf("***********************************************\n\n\n\n");
 			    
-			    printf("      DADOS DA RESERVA N° %d\n\n\n", aux_canceladas);
+			    printf("      DADOS DA RESERVA N° %d\n\n\n", aux_canceladas);// Confirmação dos dados para cancelar a reserva
 			    
 			    printf("Nome do passageiro: %s\n", nome_cli_reserva[aux_canceladas]);
 			    printf("Idade do passageiro: %d\n", idade_cli_reserva[aux_canceladas]);
@@ -237,13 +234,14 @@ do{// do-while para voltar ao menu principal
 						printf("\nOPÇÃO INVÁLIDA");
 				}while(confirma_cancelamento != 'S' && confirma_cancelamento != 'N');
 				
-				if(confirma_cancelamento=='N')
+				if(confirma_cancelamento=='N')				
 					break;
 				else{
 					// Altera a situação da reserva para cancelada	
 					situacao_reserva[aux_canceladas]='I';
 					// Altera a situação do assento para disponível	
 					vetor_assentos[assento_reserva[aux_canceladas]]='D';}
+				
 				
 			;break;
 	    	case 4: 
@@ -258,6 +256,7 @@ do{// do-while para voltar ao menu principal
 						fflush(stdin);
 							if(situacao_reserva[aux_confirma]=='I')
 								printf("\nRESERVA CANCELADA\n");
+								else
 								if(situacao_reserva[aux_confirma]=='A' || situacao_reserva[aux_confirma]=='C')
 									break;
 										else
@@ -275,7 +274,7 @@ do{// do-while para voltar ao menu principal
 				
 				if(sair_confirmada=='N')
 					break;
-					
+									
 				system("cls");
 			
 				printf("***********************************************\n");
@@ -307,8 +306,7 @@ do{// do-while para voltar ao menu principal
 				situacao_reserva[aux_confirma]='C';
 				// Altera a situação do assento para confirmada
 				vetor_assentos[assento_reserva[aux_confirma]]='C';
-				// Contador de reservas confirmadas
-				cont_confirmada++;}
+				}
 			
 			;break;
 	    	case 5: 
@@ -317,22 +315,24 @@ do{// do-while para voltar ao menu principal
 			    printf("***********************************************\n\n\n\n");
 			    
 			    printf("      RESUMO DO DESTINO - %s\n\n\n", nome_destino);
-			    
-			    for(int i=1;i<=aux_reserva;i++){
+											    			    
+			    for(int i=1;i<=assentos_aviao;i++){ //verificar aqui ainda
 			    	
-			    	if(situacao_reserva[i]=='A')
+			    	if(situacao_reserva[i]=='A'){
 			    	
-			    	valor_reservas = valor_reservas+valor_passagem_reserva[i];
+			    	valor_reservas = valor_reservas+valor_passagem_reserva[i];//Soma os valores das passagens reservadas
+			    	cont_reservada++;}// conta as reservas
 			    	
 			    		else
-			    			if(situacao_reserva[i]=='C')
+			    			if(situacao_reserva[i]=='C'){
 			    	
 			    			valor_total_confirmadas = valor_total_confirmadas+valor_passagem_reserva[i];
+			    			cont_confirmada++;}
 				};
 			
-				aux_disponiveis = assentos_aviao - cont_confirmada -aux_reserva;
+				aux_disponiveis = (assentos_aviao-cont_confirmada-cont_reservada);
 				
-				printf("TOTAL DE PASSAGENS RESERVADAS: %d", aux_reserva);
+				printf("TOTAL DE PASSAGENS RESERVADAS: %d", cont_reservada);
 				printf("\n\nTOTAL DE PASSAGENS CONFIRMADAS: %d", cont_confirmada);
 				printf("\n\nTOTAL DE PASSAGENS DISPONÍVEIS: %d", aux_disponiveis);
 				printf("\n\n\033[93;1mVALOR TOTAL DE PASSAGENS RESERVADAS: %.2f\033[0m", valor_reservas);
@@ -340,38 +340,45 @@ do{// do-while para voltar ao menu principal
 				
 				system("pause");			
 			;break;
+			case 6: ;break;// Atalho para sair do programa
 	    	default:printf("\nOPÇÃO INVÁLIDA\n");   	
 	    };    
 		
-		do{
-		fflush(stdin);
-		printf("\n\n\n     DESEJA VOLTAR AO MENU DE OPÇÕES DO DESTINO?[S|N]\n\n\n");
-		scanf("%c", &menu_destino_escolhido);
-		fflush(stdin);
+		if(menu_opcao_destino==6)
+			break;
+		else
+			do{
+			fflush(stdin);
+			printf("\n\n\n     DESEJA VOLTAR AO MENU DE OPÇÕES DO DESTINO?[S|N]\n\n\n");// Opção para voltar ao menu do destino
+			scanf("%c", &menu_destino_escolhido);
+			fflush(stdin);
+			
+			menu_destino_escolhido = toupper(menu_destino_escolhido);
+			
+				if(menu_destino_escolhido != 'S' && menu_destino_escolhido != 'N')
+					printf("\nOPÇÃO INVÁLIDA");
+			}while(menu_destino_escolhido != 'S' && menu_destino_escolhido != 'N');
 		
-		menu_destino_escolhido = toupper(menu_destino_escolhido);
-		
-			if(menu_destino_escolhido != 'S' && menu_destino_escolhido != 'N')
-				printf("\nOPÇÃO INVÁLIDA");
-		}while(menu_destino_escolhido != 'S' && menu_destino_escolhido != 'N');
-	
 		system("cls");
 	
 	}while(menu_destino_escolhido=='S');
 	
 		system("cls");
 		
-	do{
-		fflush(stdin);
-		printf("\nDESEJA VERIFICAR OUTRO DESTINO?[S|N]\n");
-		scanf("%c", &menu_princ);
-		fflush(stdin);
-		
-		menu_princ = toupper(menu_princ);
-		
-			if(menu_princ != 'S' && menu_princ != 'N')
-				printf("\nOPÇÃO INVÁLIDA");
-	}while(menu_princ != 'S' && menu_princ != 'N');	
+	if(menu_opcao_destino==6)
+			break;
+	else		
+		do{
+			fflush(stdin);
+			printf("\nDESEJA CADASTRAR OUTRO DESTINO?[S|N]\n");// Opção para iniciar outro destino
+			scanf("%c", &menu_princ);
+			fflush(stdin);
+			
+			menu_princ = toupper(menu_princ);
+			
+				if(menu_princ != 'S' && menu_princ != 'N')
+					printf("\nOPÇÃO INVÁLIDA");
+		}while(menu_princ != 'S' && menu_princ != 'N');	
 		
 	system("cls");
 	
