@@ -73,12 +73,12 @@ do{// do-while para voltar ao menu principal
 		}while(assentos_aviao<90 || assentos_aviao>200);
    
  	// Declaração de variáveis das reservas
-    int aux_assentos=1,aux_reserva=1, primeira_reserva=1, aux_canceladas, aux_confirma, cont_confirmada=0, cont_reservada=0, aux_disponiveis;
+    int aux_assentos=1,aux_reserva=1, primeira_reserva=1, aux_canceladas, aux_confirma, cont_confirmada, cont_reservada, aux_disponiveis;
     int num_reserva[assentos_aviao], pessoas_reserva[assentos_aviao],idade_cli_reserva[assentos_aviao];
     int assento_reserva[assentos_aviao], reservados[assentos_aviao], confirmados[assentos_aviao], disponiveis[assentos_aviao];
     char fim_efetuar_reserva, nome_cli_reserva[assentos_aviao][100], vetor_assentos[assentos_aviao], situacao_reserva[assentos_aviao];
     char confirma_cancelamento, valida_confirmacao, sair_cancelada, sair_confirmada;
-    float valor_passagem_reserva[assentos_aviao], valor_total_confirmadas=0, valor_reservas=0;
+    float valor_passagem_reserva[assentos_aviao], valor_total_confirmadas, valor_reservas;
 	
 		for(aux_assentos=1;aux_assentos<=assentos_aviao;aux_assentos++){ // Criação do mapa de assentos inicial
 			vetor_assentos[aux_assentos] = 'D';
@@ -196,7 +196,7 @@ do{// do-while para voltar ao menu principal
 										else
 										printf("\nRESERVA INEXISTENTE\n");
 							
-							printf("TENTAR NOVAMENTE?[S|N]\n");// opção de entrar com outra reserva
+							printf("\nTENTAR NOVAMENTE?[S|N]\n");// opção de entrar com outra reserva
 							scanf("%c", &sair_cancelada);
 							fflush(stdin);
 							
@@ -257,12 +257,15 @@ do{// do-while para voltar ao menu principal
 							if(situacao_reserva[aux_confirma]=='I')
 								printf("\nRESERVA CANCELADA\n");
 								else
-								if(situacao_reserva[aux_confirma]=='A' || situacao_reserva[aux_confirma]=='C')
-									break;
+								if(situacao_reserva[aux_confirma]=='C')
+									printf("\nRESERVA CONFIRMADA\n");
 										else
-										printf("\nRESERVA INEXISTENTE\n");
+										if(situacao_reserva[aux_confirma]=='A')
+											break;
+											else
+											printf("\nRESERVA INEXISTENTE\n");
 							
-							printf("TENTAR NOVAMENTE?[S|N]\n");
+							printf("\nTENTAR NOVAMENTE?[S|N]\n");
 							scanf("%c", &sair_confirmada);
 							fflush(stdin);
 							
@@ -315,28 +318,45 @@ do{// do-while para voltar ao menu principal
 			    printf("***********************************************\n\n\n\n");
 			    
 			    printf("      RESUMO DO DESTINO - %s\n\n\n", nome_destino);
+				
+				valor_reservas=0;
+			    valor_total_confirmadas=0;
+			    cont_reservada=0;
+			    cont_confirmada=0;
 											    			    
 			    for(int i=1;i<=assentos_aviao;i++){ //verificar aqui ainda
 			    	
-			    	if(situacao_reserva[i]=='A'){
+			    	if(vetor_assentos[i]=='R'){
+			    		
+			    		cont_reservada++;}// conta as reservas
 			    	
-			    	valor_reservas = valor_reservas+valor_passagem_reserva[i];//Soma os valores das passagens reservadas
-			    	cont_reservada++;}// conta as reservas
+			    		else
+			    			if(vetor_assentos[i]=='C'){
+			    	
+			    			cont_confirmada++;}
+				};
+				
+				for(int i=1;i<=aux_reserva;i++){ //verificar aqui ainda
+			    	
+			    	if(situacao_reserva[i]=='A')
+			    		
+			    		valor_reservas = valor_reservas+valor_passagem_reserva[i];//Soma os valores das passagens reservadas
 			    	
 			    		else
 			    			if(situacao_reserva[i]=='C'){
 			    	
-			    			valor_total_confirmadas = valor_total_confirmadas+valor_passagem_reserva[i];
-			    			cont_confirmada++;}
+			    			valor_total_confirmadas = valor_total_confirmadas+valor_passagem_reserva[i];}
 				};
-			
+				
+				
+							
 				aux_disponiveis = (assentos_aviao-cont_confirmada-cont_reservada);
 				
 				printf("TOTAL DE PASSAGENS RESERVADAS: %d", cont_reservada);
 				printf("\n\nTOTAL DE PASSAGENS CONFIRMADAS: %d", cont_confirmada);
 				printf("\n\nTOTAL DE PASSAGENS DISPONÍVEIS: %d", aux_disponiveis);
 				printf("\n\n\033[93;1mVALOR TOTAL DE PASSAGENS RESERVADAS: %.2f\033[0m", valor_reservas);
-				printf("\n\n\033[92;1mVALOR TOTAL DE PASSAGENS CONFIRMADAS:%.2f\033[0m\n\n", valor_total_confirmadas);
+				printf("\n\n\033[92;1mVALOR TOTAL DE PASSAGENS CONFIRMADAS: %.2f\033[0m\n\n", valor_total_confirmadas);
 				
 				system("pause");			
 			;break;
