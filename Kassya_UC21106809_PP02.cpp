@@ -74,11 +74,10 @@ do{// do-while para voltar ao menu principal
    
  	// Declaração de variáveis das reservas
     int aux_assentos=1,aux_reserva=1, primeira_reserva=1, aux_canceladas, aux_confirma, cont_confirmada, cont_reservada, aux_disponiveis;
-    int num_reserva[assentos_aviao], pessoas_reserva[assentos_aviao],idade_cli_reserva[assentos_aviao];
-    int assento_reserva[assentos_aviao], reservados[assentos_aviao], confirmados[assentos_aviao], disponiveis[assentos_aviao];
-    char fim_efetuar_reserva, nome_cli_reserva[assentos_aviao][100], vetor_assentos[assentos_aviao], situacao_reserva[assentos_aviao];
+    int idade_cli_reserva[500], assento_reserva[assentos_aviao];
+    char nome_cli_reserva[500][100], vetor_assentos[assentos_aviao], situacao_reserva[500];
     char confirma_cancelamento, valida_confirmacao, sair_cancelada, sair_confirmada;
-    float valor_passagem_reserva[assentos_aviao], valor_total_confirmadas, valor_reservas;
+    float valor_passagem_reserva[500], valor_total_confirmadas, valor_reservas;
 	
 		for(aux_assentos=1;aux_assentos<=assentos_aviao;aux_assentos++){ // Criação do mapa de assentos inicial
 			vetor_assentos[aux_assentos] = 'D';
@@ -87,7 +86,7 @@ do{// do-while para voltar ao menu principal
     system("cls");
     
 	
-	do{ 
+	do{ // do-while para voltar ao menu do destino
 	    printf("***********************************************\n");
 	    printf("*************SALUMAR LINHAS AEREAS*************\n");
 	    printf("***********************************************\n\n\n\n");
@@ -138,7 +137,7 @@ do{// do-while para voltar ao menu principal
 				
 				do{	
 					fflush(stdin);
-					printf("\nINFOME A IDADE DO PASSAGEIRO Nº %d: ", aux_reserva);
+					printf("\nINFORME A IDADE DO PASSAGEIRO Nº %d: ", aux_reserva);
 					scanf("%d",&idade_cli_reserva[aux_reserva]);
 					fflush(stdin);
 						if(idade_cli_reserva[aux_reserva]<0 ||idade_cli_reserva[aux_reserva]>115)
@@ -147,7 +146,7 @@ do{// do-while para voltar ao menu principal
 				
 				do{	
 					fflush(stdin);
-					printf("\nINFOME O ASSENTO DO PASSAGEIRO Nº %d: ", aux_reserva);
+					printf("\nINFORME O ASSENTO DO PASSAGEIRO Nº %d: ", aux_reserva);
 					scanf("%d",&assento_reserva[aux_reserva]);
 					fflush(stdin);
 						if(assento_reserva[aux_reserva]<0 || assento_reserva[aux_reserva]>assentos_aviao)
